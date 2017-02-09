@@ -22,10 +22,10 @@ public class Persona
         caloriasIngerida = 0;
         
         if(sexo){
-            maximoCaloriasQuePuedeIngerir = (10 * peso) + (6 * altura) - (5 * edad) + 5;        //Calcula la cantidad de calorias que puede tomar si es hombre
+            maximoCaloriasQuePuedeIngerir = (10 * peso) + (6 * altura) + (5 * edad) + 5;        //Calcula la cantidad de calorias que puede tomar si es hombre
         }
         else{
-            maximoCaloriasQuePuedeIngerir = (10 * peso) + (6 * altura) - (5 * edad) - 161;       //Calcula la cantidad de calorias que puede tomar si es mujer
+            maximoCaloriasQuePuedeIngerir = (10 * peso) + (6 * altura) + (5 * edad) - 161;       //Calcula la cantidad de calorias que puede tomar si es mujer
         }
     }
 
@@ -37,7 +37,7 @@ public class Persona
     public int comer(Comida nombreComida)
     {
         int caloriasPorComida = -1; 
-        if((caloriasIngerida + nombreComida.getCalorias()) <= maximoCaloriasQuePuedeIngerir){   //Compruebo que las calorias que le mandan tomar no supere el máximo de calorias que puede tomar.
+        if(caloriasIngerida <= maximoCaloriasQuePuedeIngerir){   //Compruebo que las calorias que le mandan tomar no supere el máximo de calorias que puede tomar.
             caloriasPorComida = nombreComida.getCalorias();
             caloriasIngerida = caloriasIngerida + caloriasPorComida;
         }
@@ -50,4 +50,18 @@ public class Persona
     public int getCaloriasIngeridas(){
         return caloriasIngerida;
     }
+    
+    /**
+     *Ahora queremos que sea posible preguntarle cosas a la persona. Si no ha sobrepasado su metabolismo basal, te contestará "SI" o "NO" (¡en mayúsculas!) 
+     *dependiendo de si la pregunta tiene una longitud (es decir, el número de letras de la misma) divisible por 3 o no, respectivamente.
+     *En caso de que la persona ya haya sobrepasado el metabolismo basal o en el caso de que tu pregunta contenga el nombre de la persona, responderá con la misma pregunta que le has hecho pero gritando 
+     *(es decir, el mismo texto de la pregunta pero en mayúsculas) indiferentemente de la longitud de a pregunta.
+     *El método que se utiliza para preguntar cosas a la persona debe llamarse contestar, admite un único parámetro y debe devolver la respuesta además de imprimirla por pantalla.
+     */
+  //  public int contestar(){
+        
+       // if(maximoCaloriasQuePuedeIngerir){
+        
+      //  }
+   // }
 }
