@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 /**
  * Diseña una clase Persona que simule una persona y una clase Comida que simule una comida. Ejemplos de comidas serían paella, arroz blanco, macarrones, pollo asado, lentejas, etc. 
  * Cada comida se carcateriza por un nombre y por la cantidad de calorias que posee (sin decimales).
@@ -10,6 +10,8 @@ public class Persona
     private int caloriasIngerida;                           //Calorias tomadas.
     private int maximoCaloriasQuePuedeIngerir;              //Máximo calorias que puede tomar
     private String nombrePersona;                           //Guarda el nombre de la persona;
+	private ArrayList<Comida> comidaTomada;					//Es un arraylist que guarda las comidas tomadas;
+	private Comida comidaMasCaloricaTomada;					//Nos dice cual es la comida tomada mas calórica
    
     /**
      * El constructor de la clase Persona deberá tener (en el mismo orden):
@@ -23,6 +25,8 @@ public class Persona
     {
         caloriasIngerida = 0;
         nombrePersona = nombre;
+		comidaTomada = new ArrayList<Comida>();
+		comidaMasCaloricaTomada = null;
         
         if(sexo){
             maximoCaloriasQuePuedeIngerir = (10 * peso) + (6 * altura) + (5 * edad) + 5;        //Calcula la cantidad de calorias que puede tomar si es hombre
@@ -40,10 +44,17 @@ public class Persona
     public int comer(Comida nombreComida)
     {
         int caloriasPorComida = -1; 
+		if(comidaMasCaloricaTomada == null){
+			comidaMasCaloricaTomada = nombreComida;
+		}
         if(caloriasIngerida <= maximoCaloriasQuePuedeIngerir){   //Compruebo que las calorias que le mandan tomar no supere el máximo de calorias que puede tomar.
             caloriasPorComida = nombreComida.getCalorias();
             caloriasIngerida = caloriasIngerida + caloriasPorComida;
-        }
+			comidaTomada.add(nombreComida);
+			if(comidaMasCaloricaTomada.getCalorias() < nombreComida.getCalorias()){
+				comidaMasCaloricaTomada = nombreComida;
+			}
+		}
         return caloriasPorComida;
     }
     
@@ -81,4 +92,25 @@ public class Persona
             }       
    		return devuelve;
     }
+
+    /**
+     * Se pide que implementes el código necesario para disponer de un método llamado getAlimentoMasCaloricoConsumido que imprima por pantalla y que devuelva el nombre de la comida más calórico ingerida hasta ahora por un usuario.
+	 * En caso de que la persona no haya comido nada el método infoma por pantalla de tal situación y devuelve null. En caso de que haya empate entre dos o más comidas, imprime y devuelve la última de ellas.
+     */
+    public String getAlimentoMasCaloricoConsumido (){
+		String respuesta = null;
+
+		if(comidaTomada.size() == 0){
+			System.out.println("No ha comido nada");
+		  }
+		else{
+			respuesta = comidaMasCaloricaTomada.getNombre();
+		}
+
+		for(int contador = 0; contador < comidaTomada.size(); contador++){
+			System.out.println(comidaTomada.get(contador));
+			}
+        return respuesta;
+    }
 }
+

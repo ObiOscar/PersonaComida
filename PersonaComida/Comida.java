@@ -8,6 +8,7 @@
 public class Comida
 {
     private int caloriasComida;
+	private String nombreComida;
 
     /**
      * El constructor de la clase Comida deberá tener (en el mismo orden):
@@ -15,19 +16,25 @@ public class Comida
      * Un parámetro que permita indicar el nombre de la comida.
      * Un parámetro entero que permita indicar la cantidad de calorias asociadas a la comida.
      */
-    public Comida(String nombreComida,int calorias)
+    public Comida(String nombre,int calorias)
     {
+	   nombreComida = nombre;
        caloriasComida = calorias;
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+	 *Devuelve las calorias
      */
     public int getCalorias()
     {
         return caloriasComida;
+    }
+
+    /**
+	 *Devuelve el nombre
+     */
+    public String getNombre()
+    {
+        return nombreComida;
     }
 }
