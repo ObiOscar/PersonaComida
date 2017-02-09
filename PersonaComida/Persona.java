@@ -5,10 +5,12 @@
  */
 public class Persona
 {
-    private int caloriasIngerida;                //Calorias tomadas.
-    private int maximoCaloriasQuePuedeIngerir;   //Máximo calorias que puede tomar
-    
-
+    private static final int PREGUNTA_DIVISIBLE_ENTRE = 3;  //Lo uso para comprobar si la pregunta pasada es disivisible entre este entero 
+   
+    private int caloriasIngerida;                           //Calorias tomadas.
+    private int maximoCaloriasQuePuedeIngerir;              //Máximo calorias que puede tomar
+    private String nombrePersona;                           //Guarda el nombre de la persona;
+   
     /**
      * El constructor de la clase Persona deberá tener (en el mismo orden):
      * Un parámetro que permita indicar el nombre de la persona.
@@ -17,9 +19,10 @@ public class Persona
      * Un parámetro entero que permita indicar la altura en centímetros de la persona.
      * Un parámetro entero que permita indicar la edad en años de la persona.
      */
-    public Persona(String nombrePersona, boolean sexo, int peso, int altura, int edad)
+    public Persona(String nombre, boolean sexo, int peso, int altura, int edad)
     {
         caloriasIngerida = 0;
+        nombrePersona = nombre;
         
         if(sexo){
             maximoCaloriasQuePuedeIngerir = (10 * peso) + (6 * altura) + (5 * edad) + 5;        //Calcula la cantidad de calorias que puede tomar si es hombre
@@ -58,10 +61,24 @@ public class Persona
      *(es decir, el mismo texto de la pregunta pero en mayúsculas) indiferentemente de la longitud de a pregunta.
      *El método que se utiliza para preguntar cosas a la persona debe llamarse contestar, admite un único parámetro y debe devolver la respuesta además de imprimirla por pantalla.
      */
-  //  public int contestar(){
+    public String contestar(String pregunta){
+		String devuelve = "";
+        System.out.println(pregunta);
         
-       // if(maximoCaloriasQuePuedeIngerir){
-        
-      //  }
-   // }
+        if(caloriasIngerida <= maximoCaloriasQuePuedeIngerir && !pregunta.contains(nombrePersona)){  	
+            if((pregunta.length() % PREGUNTA_DIVISIBLE_ENTRE) == 0){
+                System.out.println("SI");
+				devuelve = "SI";
+            }
+            else{
+                System.out.println("NO");
+				devuelve = "NO";
+            }
+        }
+        else{
+               System.out.println(pregunta.toUpperCase());
+			   devuelve = pregunta.toUpperCase();
+            }       
+   		return devuelve;
+    }
 }
